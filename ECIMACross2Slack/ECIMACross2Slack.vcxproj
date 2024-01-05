@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECIMACross2Slack.cpp" />
+    <ClCompile Include="ECIMACross2Slack_Curl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ECIMACross2Slack.h" />
+    <ClInclude Include="ECIMACross2Slack_Curl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -80,12 +82,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>c:\SierraChart\Data\</OutDir>
     <TargetName>$(ProjectName)_64</TargetName>
-    <IncludePath>C:\SierraChart\ACS_Source;$(IncludePath)</IncludePath>
+    <IncludePath>C:\SierraChart\ACS_Source;$(SolutionDir)curl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>c:\SierraChart\Data\</OutDir>
     <TargetName>$(ProjectName)_64</TargetName>
-    <IncludePath>C:\SierraChart\ACS_Source;$(IncludePath)</IncludePath>
+    <IncludePath>C:\SierraChart\ACS_Source;$(SolutionDir)curl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

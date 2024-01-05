@@ -18,9 +18,15 @@
     <ClCompile Include="ECIMACross2Slack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ECIMACross2Slack_Curl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ECIMACross2Slack.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ECIMACross2Slack_Curl.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
