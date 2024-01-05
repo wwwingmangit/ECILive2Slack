@@ -1,1 +1,1 @@
-# ECILive2Slack
+# ECIMACross2Slack
