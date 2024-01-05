@@ -35,7 +35,7 @@ SCSFExport scsf_ECIMACross2Slack(SCStudyGraphRef sc)
 	// study descriptions
 	//
 	const SCString _studyName = "ECIMACross2Slack";
-	const SCString _studyVersion = "V1";
+	const SCString _studyVersion = "V2";
 	const SCString _studyDescription =
 		"<p>ECIMACross2Slack: Illustrate MACross detection and send signal to Slack</p>"
 		"<p>This is an open source tool under MIT Licence.</p>"
@@ -96,7 +96,7 @@ SCSFExport scsf_ECIMACross2Slack(SCStudyGraphRef sc)
 		_timeFilterEndTimeIN.SetTime(HMS_TIME(14, 59, 59));
 
 		_drawOffsetInTicksIN.Name = "Draw offset in Ticks?";
-		_drawOffsetInTicksIN.SetInt(10);
+		_drawOffsetInTicksIN.SetInt(3);
 		_drawOffsetInTicksIN.SetIntLimits(0, INT_MAX);
 
 		// misc
@@ -152,6 +152,7 @@ SCSFExport scsf_ECIMACross2Slack(SCStudyGraphRef sc)
 	// Compute
 	//
 
+	// compute cross
 	const float _curBarFastMA = _fastMAFA[_currentBarIndex];
 	const float _curBarSlowMA = _slowMAFA[_currentBarIndex];
 	const float _prevBarFastMA = _fastMAFA[_currentBarIndex-1];

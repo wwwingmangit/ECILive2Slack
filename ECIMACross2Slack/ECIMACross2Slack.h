@@ -16,7 +16,7 @@ See LICENCE file.
 
 // version of project
 #define ECI_PROJECT_NAME "ECIMACross2Slack"
-#define ECI_PROJECT_VERSION "V1"
+#define ECI_PROJECT_VERSION "V2"
 
 // channels hardcoded url for test/dev/...
 enum class ECIMaCross2Slack_ChannelType
