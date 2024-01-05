@@ -30,6 +30,7 @@
     <ProjectGuid>{b440a578-28c2-423a-936d-c245fedde6fa}</ProjectGuid>
     <RootNamespace>ECIMACross2Slack</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ECIMACross2SlackV1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

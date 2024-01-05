@@ -24,20 +24,20 @@ enum class ECIMACross2Slack_SendMode
 
 // ------------------------------------------------------------------------
 //
-// scsf_PE2_ECIMACross2Slack Study
+// scsf_ECIMACross2Slack Study
 //
 // ------------------------------------------------------------------------
-SCSFExport scsf_PE2_ECIMACross2Slack(SCStudyGraphRef sc)
+SCSFExport scsf_ECIMACross2Slack(SCStudyGraphRef sc)
 {
 	SCString _logMsg;
 
 	//
 	// study descriptions
 	//
-	const SCString _studyName = "PE2_ECIMACross2Slack";
+	const SCString _studyName = "ECIMACross2Slack";
 	const SCString _studyVersion = "V1";
 	const SCString _studyDescription =
-		"<p>PE2_ECIMACross2Slack: Illustrate MACross detection and send signal to Slack</p>"
+		"<p>ECIMACross2Slack: Illustrate MACross detection and send signal to Slack</p>"
 		"<p>This is an open source tool under MIT Licence.</p>"
 		"<p>Developped by Emmanuel Chriqui aka wwwingman.</p>";
 
