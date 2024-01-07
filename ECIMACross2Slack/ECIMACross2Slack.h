@@ -18,20 +18,7 @@ See LICENCE file.
 #define ECI_PROJECT_NAME "ECIMACross2Slack"
 #define ECI_PROJECT_VERSION "V2"
 
-// channels hardcoded url for test/dev/...
-enum class ECIMaCross2Slack_ChannelType
-{
-	Dev = 0,
-	Test = 1,
-	Prod = 2,
-};
-#define ECIMACROSS2SLACK_CHANNELTYPE_STRINGS "Dev;Test;Prod"
-
-const SCString g_ECIMaCross2Slack_ChannelURLTable[] =
-{
-	"https://hooks.slack.com/services/TODO",
-	"https://hooks.slack.com/services/TODO",
-	"https://hooks.slack.com/services/TODO",
-};
+// default slack channel URL
+#define ECI_MACROSS_TO_SLACK_APIWEBHOOKURL "https://hooks.slack.com/services/ TODO: Fill me"
 
 #endif __ECI_MACROSS_TO_SLACK_H__

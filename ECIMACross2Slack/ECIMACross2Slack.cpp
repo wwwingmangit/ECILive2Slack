@@ -5,22 +5,12 @@ See LICENCE file.
 
 ------------------------------------------------------------------------ */
 #include "ECIMACross2Slack.h"
+#include "ECIMACross2Slack_Curl.h"
 
 //
 // DLL
 const SCString g_ScDllName = (SCString)ECI_PROJECT_NAME + (SCString)ECI_PROJECT_VERSION;
 SCDLLName(g_ScDllName)
-
-//
-// Send modes
-//
-enum class ECIMACross2Slack_SendMode
-{
-	DontSendEvents = 0,
-	SendRealtimeEvents,
-};
-#define ECIMACROSS2SLACK_SENDMODE_STRINGS "Don't send;Send Realtime Events"
-
 
 // ------------------------------------------------------------------------
 //
@@ -37,7 +27,7 @@ SCSFExport scsf_ECIMACross2Slack(SCStudyGraphRef sc)
 	const SCString _studyName = "ECIMACross2Slack";
 	const SCString _studyVersion = "V2";
 	const SCString _studyDescription =
-		"<p>ECIMACross2Slack: Illustrate MACross detection and send signal to Slack</p>"
+		"<p>ECIMACross2Slack: Proof of concept to illustrate MACross detection and send signal to Slack</p>"
 		"<p>This is an open source tool under MIT Licence.</p>"
 		"<p>Developped by Emmanuel Chriqui aka wwwingman.</p>";
 
@@ -56,6 +46,9 @@ SCSFExport scsf_ECIMACross2Slack(SCStudyGraphRef sc)
 
 	SCInputRef _fastMAIN = sc.Input[_inCnt++];
 	SCInputRef _slowMAIN = sc.Input[_inCnt++];
+
+	SCInputRef _sendSignalToSlackIN		= sc.Input[_inCnt++];
+	SCInputRef _slackURLIN	= sc.Input[_inCnt++];
 
 	SCInputRef  _timeFilterStartTimeIN	= sc.Input[_inCnt++];
 	SCInputRef  _timeFilterEndTimeIN	= sc.Input[_inCnt++];
@@ -86,9 +79,13 @@ SCSFExport scsf_ECIMACross2Slack(SCStudyGraphRef sc)
 		// input
 		_fastMAIN.Name = "Fast MA Study";
 		_fastMAIN.SetStudySubgraphValues(0, 0);
-
 		_slowMAIN.Name = "Slow MA Study";
 		_slowMAIN.SetStudySubgraphValues(0, 0);
+
+		_sendSignalToSlackIN.Name = "Send signals to Slack";
+		_sendSignalToSlackIN.SetYesNo(false);
+		_slackURLIN.Name = "==> Slack channel URL ?";
+		_slackURLIN.SetString(ECI_MACROSS_TO_SLACK_APIWEBHOOKURL);
 
 		_timeFilterStartTimeIN.Name = "Time Filter Start time?";
 		_timeFilterStartTimeIN.SetTime(HMS_TIME(03, 00, 0));
@@ -152,7 +149,7 @@ SCSFExport scsf_ECIMACross2Slack(SCStudyGraphRef sc)
 	// Compute
 	//
 
-	// compute cross
+	// compute MA cross signals, they are mutually exclusive
 	const float _curBarFastMA = _fastMAFA[_currentBarIndex];
 	const float _curBarSlowMA = _slowMAFA[_currentBarIndex];
 	const float _prevBarFastMA = _fastMAFA[_currentBarIndex-1];
@@ -160,6 +157,37 @@ SCSFExport scsf_ECIMACross2Slack(SCStudyGraphRef sc)
 
 	const int _upSignal = (_prevBarSlowMA > _prevBarFastMA) && (_curBarSlowMA < _curBarFastMA);
 	const int _dnSignal = (_prevBarSlowMA < _prevBarFastMA) && (_curBarSlowMA > _curBarFastMA);
+
+	//
+	// Send signal to slack using curl
+	// We want all signals to be drawn, but send only signal of the last bar
+	// This will send signals on real time and on replay but will ignore historical signals
+	//
+	const int _sendSignalToSlack = _sendSignalToSlackIN.GetYesNo();
+
+	if (_sendSignalToSlack &&
+		(_currentBarIndex == sc.ArraySize - 2 && !sc.IsFullRecalculation) &&
+		(_upSignal || _dnSignal))
+	{
+		SCString _signal;
+
+		const int _dir = _upSignal ? +1 : -1;
+
+		const char* _slackSignalURL = _slackURLIN.GetString();
+		SCString _marketName = (sc.CustomChartTitleBarName != "") ? sc.CustomChartTitleBarName : sc.Symbol;
+		SCDateTime _currentBarDateTime = sc.BaseDateTimeIn[_currentBarIndex];
+
+		_signal.Format("*%s* : %s *MACross* Close at <%g> | detected at <%s>",
+			_marketName.GetChars(),
+			(_dir == +1) ? ":arrow_up:" : ":arrow_down:",
+			sc.Close[_currentBarIndex],
+			sc.DateTimeToString(_currentBarDateTime, FLAG_DT_COMPLETE_DATETIME).GetChars());
+
+		ECIMACross2Slack_Curl_BuildAndSendSignal(
+			sc,
+			_slackSignalURL,
+			_signal.GetChars());
+	}
 
 	//
 	// Draw
