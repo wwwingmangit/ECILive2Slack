@@ -20,3 +20,12 @@ This **Real-Time Market Event Notification System** is designed for traders and 
 - **Stay Informed on the Go**: Receive immediate alerts about significant market movements, allowing for timely decisions.
 - **Minimize Screen Time**: Frees you from the need to continuously watch market fluctuations, offering flexibility and efficiency.
 - **Customized Alerts**: Tailored notifications based on sophisticated market analysis, ensuring relevance and accuracy.
+
+## How to use
+
+- *Creat a Webhook in you Slack API*: In the Slack API of your apps (https://api.slack.com) creat a webhook. It should point to a notification channel you created. Save the URL.
+- *Compile Custom study*: Open the project in Visual Studio and compile it. Optional : change in ECIMACross2Slack/ECIMACross2Slack.h file Slack URL constant (ECI_MACROSS_TO_SLACK_APIWEBHOOKURL).
+- *Creat a chartbook in SierraChart*: A chartbook is provided in CHT folder. But you can creat your own.
+- *Test*: Use replay of the chartbook for proper notification in your Slack.
+- *Run*: Host on a or remote server with SierraChart for one or multiple markets...
+
