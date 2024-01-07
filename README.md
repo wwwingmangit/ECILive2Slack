@@ -29,3 +29,7 @@ This **Real-Time Market Event Notification System** is designed for traders and 
 - *Test*: Use replay of the chartbook for proper notification in your Slack.
 - *Run*: Host on a or remote server with SierraChart for one or multiple markets...
 
+## Licensing & Contributing
+
+The code is under the MIT License. Thus, as long as you keep distributing the License, feel free to share, clone, or change the code as you like.
+Furthermore, you can contact me directly on LinkedIn (www.linkedin.com/in/emmanuelchriqui) if you have any questions.
