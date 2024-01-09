@@ -10,6 +10,8 @@ This **Real-Time Market Event Notification System** is designed for traders and 
 - **Customized Market Analysis**: Employs a specially developed study that analyzes live market data to detect critical trading moments and generate actionable signals.
 - **Secure and Targeted Notifications via Slack**: Once a market event is detected, the system communicates with the configured Slack API to deliver these signals securely. Notifications are sent to the appropriate channels, ensuring they reach the right audience.
 
+![Design Idea](SlackNotificationDesign.png)
+
 ## Technical Details
 
 - **Development**: The system is crafted in C++, tailored to SierraChart's robust environment.
